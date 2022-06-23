@@ -1,6 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
+const moment = require('moment-timezone')
 
 require('dotenv').config()
 
@@ -15,6 +16,9 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
 
 const productsRouter = require('./routes/products')
 app.use('/products', productsRouter)
+
+const dateJakarta = moment.tz(Date.now(), "Asia/Jakarta")
+console.log(dateJakarta)
 
 const connection = mongoose.connection
 connection.once('open', () => {
